@@ -46,12 +46,14 @@ print("MNIST loaded.")
 
 
 def get_many_train_pair(data, idx):
+    # the input for nnx.Conv must be (batch_size, height, width, depth)
     chosen = [data.get_train_pair(i) for i in idx]
     images = jnp.stack([i[2] for i in chosen])
     labels = jnp.array([i[1] for i in chosen])
     return images.reshape((len(chosen), 28, 28, 1)), labels
 
 def get_many_test_pair(data, idx):
+    # the input for nnx.Conv must be (batch_size, height, width, depth)
     chosen = [data.get_t10k_pair(i) for i in idx]
     images = jnp.stack([i[2] for i in chosen])
     labels = jnp.array([i[1] for i in chosen])
@@ -147,64 +149,9 @@ import os
 import orbax.checkpoint as ocp
 graphdef, state = nnx.split(model)
 checkpointer = ocp.PyTreeCheckpointer()
-model_weight_path = pathlib.Path(os.getcwd()) / "model.mdl"
+model_weight_path = pathlib.Path(os.getcwd()) / "mnist_model.mdl"
 checkpointer.save(str(model_weight_path), state)
-with open('model_graphdef.pkl', 'wb') as f:
+with open('mnist_model_graphdef.pkl', 'wb') as f:
     pickle.dump(graphdef, f)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    

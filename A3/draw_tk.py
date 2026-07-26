@@ -41,10 +41,10 @@ class CNN(nnx.Module):
         x = self.layer4(x)
         return x
 
-with open('model_graphdef.pkl', 'rb') as f:
+with open('mnist_model_graphdef.pkl', 'rb') as f:
     graphdef = pickle.load(f)
 checkpointer = ocp.PyTreeCheckpointer()
-model_weight_path = pathlib.Path(os.getcwd()) / "model.mdl"
+model_weight_path = pathlib.Path(os.getcwd()) / "mnist_model.mdl"
 state = checkpointer.restore(str(model_weight_path))
 model = nnx.merge(graphdef, state)
 
