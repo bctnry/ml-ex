@@ -104,7 +104,7 @@ for i in range(10):
     bar_texts.append(txt)
 
 # --- Drawing ---
-BRUSH = 1
+BRUSH = 2
 
 def paint(event):
     gx = event.x // SCALE
@@ -153,3 +153,4 @@ def clear():
         bar_texts[i].config(text='')
 
 root.mainloop()
+
