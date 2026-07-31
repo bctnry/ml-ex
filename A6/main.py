@@ -79,12 +79,12 @@ for step in range(n_steps):
     state, opt_state, loss = train_step(state, opt_state, inputs, targets)
     if step % 25 == 0:
         print(f"Step {step}: loss={loss:.4f}")
-    # if loss < 0.01:
-    #     print("loss below 0.01, stopping early")
-    #     break
-    if loss < 1.5:
-        print('quitting early')
+    if loss < 0.01:
+        print("loss below 0.01, stopping early")
         break
+    # if loss < 1.5:
+    #     print('quitting early')
+    #     break
 
 import pathlib
 import os
