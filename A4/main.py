@@ -232,7 +232,7 @@ class ResNet(nnx.Module):
 model = ResNet(rngs=nnx.Rngs(114514))
 
 key2 = jr.key(1919810)
-n_epoch = 75
+n_epoch = 30
 batch_size = 64
 steps_per_epoch = cifar10.get_train_dataset_size() // batch_size
 total_steps = n_epoch * steps_per_epoch
