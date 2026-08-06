@@ -6,7 +6,7 @@ from model import NanoGPT
 d_model = 128
 n_heads = 4
 n_layers = 6
-max_seq_len = 256
+max_seq_len = 128
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f'device: {device}')
@@ -17,7 +17,8 @@ vocab_size = Tokenizer.n_vocab
 model = NanoGPT(vocab_size, d_model, n_heads, n_layers, max_seq_len).to(device)
 model = model.to(torch.bfloat16)
 chkp = torch.load('nanogpt_model.pt', map_location=device)
-model.load_state_dict(chkp['model'])
+state_dict = {k.replace('module.', ''): v for k, v in chkp['model'].items()}
+model.load_state_dict(state_dict)
 model.eval()
 
 @torch.no_grad()
